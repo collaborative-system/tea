@@ -5,7 +5,7 @@ SERVER_FLAGS :=
 COMMON := common/log.cpp
 SERVER_FILES := 
 FS_FILES :=
-PROTO := proto/packets.proto
+PROTO := proto/messages.proto
 
 all: build
 

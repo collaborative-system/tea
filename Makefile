@@ -1,10 +1,10 @@
 CC := g++
 C_FLAGS := -g -Wall -Wextra -pedantic -std=c++20 `pkg-config --cflags --libs protobuf` -pthread
-FS_FLAGS := -lfuse3 -D_FILE_OFFSET_BITS=64 -DFUSE_USE_VERSION=30
+FS_FLAGS := -lfuse3 -D_FILE_OFFSET_BITS=64 -DFUSE_USE_VERSION=30 -Wno-missing-field-initializers
 SERVER_FLAGS := 
 COMMON := common/log.cpp common/io.cpp common/header.cpp
 SERVER_FILES := server/tcp.cpp server/fs.cpp
-FS_FILES := filesystem/tcp.cpp 
+FS_FILES := filesystem/tcp.cpp filesystem/fs.cpp filesystem/log.cpp
 PROTO := proto/messages.proto
 
 all: build
@@ -20,7 +20,7 @@ clean-all: clean proto-clean
 
 .PHONY: filesystem-run
 filesystem-run: filesystem 
-	./filesystem/filesystem -f test/
+	./filesystem/filesystem --host=127.0.0.1 -f tests/
 
 .PHONY: filesystem 
 filesystem: filesystem/filesystem

@@ -13,7 +13,8 @@ void client_handler(int fd, recv_handlers handlers) {
             log(ERROR, fd, "Error handling message");
             return;
         }
-        if (err == 0) { log(INFO, fd, "Closing connection");
+        if (err == 0) {
+            log(INFO, fd, "Closing connection");
             close(fd);
             return;
         }

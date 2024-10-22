@@ -64,5 +64,3 @@ int recv_thread(int sock) {
     return 1;
 }
 
-
-

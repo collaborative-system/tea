@@ -110,6 +110,7 @@ int handle_recv(int sock, recv_handlers &handlers) {
         log(DEBUG, sock, "Handler failed: %d", ret);
     } else {
         log(DEBUG, sock, "Handler success: %d", ret);
+        ret = 1;
     }
     delete header;
     delete[] recv_buffer;

@@ -1,5 +1,7 @@
 #include "../common/log.h"
 #include <string>
+#include "tcp.h"
+#include "fs.h"
 
 std::string banner = R"(
  _
@@ -10,6 +12,8 @@ std::string banner = R"(
 )";
 
 int main() {
+    set_debug_log(true);
     log(NONE, banner.c_str());
+    listen(5210, get_handlers());
     return 0;
 };

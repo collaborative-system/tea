@@ -1,11 +1,11 @@
-CC := clang++
+CC := g++
 C_FLAGS := -g -Wall -Wextra -pedantic -std=c++20 `pkg-config --cflags --libs protobuf` -pthread
 FS_FLAGS := -lfuse3 -D_FILE_OFFSET_BITS=64 -DFUSE_USE_VERSION=30
 SERVER_FLAGS := 
-COMMON := common/log.cpp
-SERVER_FILES := 
-FS_FILES :=
-PROTO := proto/packets.proto
+COMMON := common/log.cpp common/io.cpp common/header.cpp
+SERVER_FILES := server/tcp.cpp server/fs.cpp
+FS_FILES := filesystem/tcp.cpp 
+PROTO := proto/messages.proto
 
 all: build
 
@@ -51,7 +51,7 @@ proto: proto/proto.pb.o
 
 proto/proto.pb.o:
 	protoc -I=proto/ --cpp_out=proto/ $(PROTO)
-	$(CC) $(CFLAGS) -c proto/*.pb.cc -o proto/proto.pb.o
+	$(CC) $(CFLAGS) -g `pkg-config --cflags --libs protobuf` -c proto/*.pb.cc -o proto/proto.pb.o
 
 .PHONY: proto-clean
 proto-clean:

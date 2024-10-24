@@ -61,7 +61,7 @@ proto-clean:
 	rm -rf proto/proto.pb.o proto/*.pb.*
 
 .PHONY: test
-test: test-binary
+test-run: test-binary
 	./tests/test-runner
 
 .PHONY: test-binary
